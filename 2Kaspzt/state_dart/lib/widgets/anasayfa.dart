@@ -5,10 +5,12 @@ class AnaSayfaEkrani extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      child: Text(
-        'Ana Sayfa İçeriği Buraya Gelecek',
-        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+    return const Scaffold(
+      body: Center(
+        child: Text(
+          'Ana Sayfa İçeriği Buraya Gelecek',
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        ),
       ),
     );
   }

@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class UrunModel{
   final int id;
   final String baslik;

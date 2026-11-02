@@ -1,54 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../controllers/sepet_kontrolu.dart';
-import 'anasayfa.dart';
 
-
-
-
-class AnaKasaEkrani extends StatelessWidget{
+class AnaKasaEkrani extends StatelessWidget {
   final Widget ekranGovdesi;
-  const AnaKasaEkrani({super.key,required this.ekranGovdesi});
-
+  const AnaKasaEkrani({super.key, required this.ekranGovdesi});
 
   @override
-  Widget build(BuildContext context){
-    
-
+  Widget build(BuildContext context) {
     return Scaffold(
-      body:ekranGovdesi,
-      bottomNavigationBar:NavigationBar(
-        selectedIndex:_aktifIndexiBul(context),
-        onDestinationSelected:(yeniIndeks){
-          if(yeniIndeks==0)context.go('/anasayfa');
-          else if(yeniIndeks==1)context.go('/vitrin');
-          else if(yeniIndeks==2)context.go('/profil');
+      body: ekranGovdesi,
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: _aktifIndexiBul(context),
+        onDestinationSelected: (yeniIndeks) {
+          if (yeniIndeks == 0) {
+            context.go('/anasayfa');
+          } else if (yeniIndeks == 1) {
+            context.go('/vitrin');
+          } else if (yeniIndeks == 2) {
+            context.go('/profil');
+          }
         },
-        destinations:[
-          const NavigationDestination(icon:Icon(Icons.home),label:'Anasayfa'),
-          const NavigationDestination(icon:Icon(Icons.store),label:'Vitrin'),
+        destinations: [
+          const NavigationDestination(icon: Icon(Icons.home), label: 'Anasayfa'),
+          const NavigationDestination(icon: Icon(Icons.store), label: 'Vitrin'),
           NavigationDestination(
-            icon:ValueListenableBuilder<int>(
-              valueListenable:SepetKontrolu.ornek.urunSayisi,
-              builder:(context,sayi,child){
+            icon: ValueListenableBuilder<int>(
+              valueListenable: SepetKontrolu.ornek.urunSayisi,
+              builder: (context, sayi, child) {
                 return Badge(
-                  label:Text('$sayi'),
-                  isLabelVisible:sayi>0,
-                  child:const Icon(Icons.person),
+                  label: Text('$sayi'),
+                  isLabelVisible: sayi > 0,
+                  child: const Icon(Icons.person),
                 );
               },
             ),
-            label:'Profil',
+            label: 'Profil',
           ),
         ],
       ),
     );
   }
 
-  int _aktifIndexiBul(BuildContext context){
-    final String konum=GoRouterState.of(context).uri.toString();
-    if(konum.startsWith('/vitrin')) return 1;
-    if(konum.startsWith('/profil')) return 2;
+  int _aktifIndexiBul(BuildContext context) {
+    final String konum = GoRouterState.of(context).uri.toString();
+    if (konum.startsWith('/vitrin')) return 1;
+    if (konum.startsWith('/profil')) return 2;
     return 0;
   }
 }
